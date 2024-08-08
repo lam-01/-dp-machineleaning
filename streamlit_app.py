@@ -9,3 +9,12 @@ with st.expander('Data'):
 df=pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv' )
 df
 
+
+st.write('**X**')
+X=df.drop('StudentID',axis=1)
+X
+
+st.write('**y**')
+y=df.species
+y
+
