@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title('🎈 App Name')
+st.title('Dự đoán kết quả học tập của học sinh ')
 
-st.write('Hello world!')
+st.write('Đây là app dự đoán kết quả')
