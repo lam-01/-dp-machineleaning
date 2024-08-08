@@ -15,6 +15,6 @@ X=df.drop('StudentID',axis=1)
 X
 
 st.write('**y**')
-y=df.species
+y=df.StudentID
 y
 
