@@ -13,11 +13,15 @@ with st.expander('Data'):
   df
 
 
-# st.write('**X**')
-# X=df.drop('StudentID',axis=1)
-# X
+st.write('**X**')
+X=df.drop('StudentID',axis=1)
+X
 
-# st.write('**y**')
-# y=df.StudentID
-# y
+st.write('**y**')
+y=df.StudentID
+y
+
+with st.expander('Data visualization'):
+  st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+
 
