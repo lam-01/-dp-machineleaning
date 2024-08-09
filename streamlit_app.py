@@ -26,34 +26,39 @@ with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='StudyTimeWeekly', y='GPA',color='GradeClass')
 
 
-with st.sidebar:
-  st.header('Input features')
-   Gender = st.selectbox('Gender', ( 'Male', 'Famale'))
-   Ethnicity = st.selectbox('Ethnicity',( 'Caucasian', 'African American', 'Asian', 'Other'))
-   ParentalEducation = st.selectbox('ParentalEducation', ('None', 'High School', 'Some College', 'Bachelor, 'Higher')
-   Tutoring = st.selectbox('Tutoring',( 'Yes','No'))
-   ParentalSupport = st.selectbox('ParentalSupport',( 'None', 'Low', 'Moderate', 'High', 'Very High'))
-   Extracurricular = st.selectbox('Extracurricular',( 'Yes','No'))
-   Volunteering = st.selectbox('Volunteering',( 'Yes','No'))
+# with st.sidebar:
+#   st.header('Input features')
+#    Gender = st.selectbox('Gender', ( 'Male', 'Famale'))
+#    Ethnicity = st.selectbox('Ethnicity',( 'Caucasian', 'African American', 'Asian', 'Other'))
+#    ParentalEducation = st.selectbox('ParentalEducation', ('None', 'High School', 'Some College', 'Bachelor, 'Higher')
+#    Tutoring = st.selectbox('Tutoring',( 'Yes','No'))
+#    ParentalSupport = st.selectbox('ParentalSupport',( 'None', 'Low', 'Moderate', 'High', 'Very High'))
+#    Extracurricular = st.selectbox('Extracurricular',( 'Yes','No'))
+#    Volunteering = st.selectbox('Volunteering',( 'Yes','No'))
   
   
-  # Create a DataFrame for the input features
-  data = {'sex': Gender,
-          'Ethnicity': Ethinicity,
-          'ParentalEducation': ParentalEducation,
-          'Tutoring': Tutoring,
-          'ParentalSupport': ParentalSupport,
-          'Extracurricular': Extracurricular,
-          'Volunteering': Volunteering,
+#   # Create a DataFrame for the input features
+#   data = {'sex': Gender,
+#           'Ethnicity': Ethinicity,
+#           'ParentalEducation': ParentalEducation,
+#           'Tutoring': Tutoring,
+#           'ParentalSupport': ParentalSupport,
+#           'Extracurricular': Extracurricular,
+#           'Volunteering': Volunteering,
           
-  input_df = pd.DataFrame(data, index=[0])
-  input_penguins = pd.concat([input_df, X], axis=0)
+#   input_df = pd.DataFrame(data, index=[0])
+#   input_penguins = pd.concat([input_df, X], axis=0)
 
-with st.expander('Input features'):
-  st.write('**Input penguin**')
-  input_df
-  st.write('**Combined penguins data**')
-  input_penguins
+# with st.expander('Input features'):
+#   st.write('**Input penguin**')
+#   input_df
+#   st.write('**Combined penguins data**')
+#   input_penguins
   
+with st.sidebar:
+    st.header('Input features')
+    gender_map = {"Male": 0, "Female": 1}
+    gender_selected = st.selectbox('Gender', ('Male', 'Female'))
+    gender_encoded = gender_map[gender_selected]
 
 
