@@ -22,6 +22,6 @@ y=df.StudentID
 y
 
 with st.expander('Data visualization'):
-  st.scatter_chart(data=df, x='Absence', y='GPA', color='species')
+  st.scatter_chart(data=df, x='Absences', y='GPA', color='species')
 
 
