@@ -23,7 +23,7 @@ y
 
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='Absences', y='GPA',color='GradeClass')
-  st.scatter_chart(data=df, x='StudyTimeWeekly', y='GPA',color=' GradeClass')
+  st.scatter_chart(data=df, x='StudyTimeWeekly', y='GPA',color='GradeClass')
   
 
 
