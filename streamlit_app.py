@@ -60,5 +60,9 @@ with st.sidebar:
     gender_map = {"Male": 0, "Female": 1}
     gender_selected = st.selectbox('Gender', ('Male', 'Female'))
     gender_encoded = gender_map[gender_selected]
-
+with st.expander('Input features'):
+  st.write('**Input penguin**')
+  input_df
+  st.write('**Combined penguins data**')
+  input_penguins
 
