@@ -34,18 +34,20 @@ with st.sidebar:
    Tutoring = st.selectbox('Tutoring',( 'Yes','No'))
    ParentalSupport = st.selectbox('ParentalSupport',( 'None', 'Low', 'Moderate', 'High', 'Very High'))
    Extracurricular = st.selectbox('Extracurricular',( 'Yes','No'))
-   Volunteering = st.selectbox('Ethnicity',( 'Yes','No'))
-   Tutoring = st.selectbox('Ethnicity',( 'Yes','No'))
+   Volunteering = st.selectbox('Volunteering',( 'Yes','No'))
   
-#   # Create a DataFrame for the input features
-#   data = {'island': island,
-#           'bill_length_mm': bill_length_mm,
-#           'bill_depth_mm': bill_depth_mm,
-#           'flipper_length_mm': flipper_length_mm,
-#           'body_mass_g': body_mass_g,
-#           'sex': gender}
-#   input_df = pd.DataFrame(data, index=[0])
-#   input_penguins = pd.concat([input_df, X_raw], axis=0)
+  
+  # Create a DataFrame for the input features
+  data = {'sex': Gender,
+          'Ethnicity': Ethinicity,
+          'ParentalEducation': ParentalEducation,
+          'Tutoring': Tutoring,
+          'ParentalSupport': ParentalSupport,
+          'Extracurricular': Extracurricular,
+          'Volunteering': Volunteering,
+          
+  input_df = pd.DataFrame(data, index=[0])
+  input_penguins = pd.concat([input_df, X_raw], axis=0)
 
 # with st.expander('Input features'):
 #   st.write('**Input penguin**')
