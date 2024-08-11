@@ -81,3 +81,11 @@ with st.expander('Input features'):
     st.dataframe(input_df)
     st.write('**Combined data**')
     st.dataframe(input_penguins)
+# Data preparation
+# Encode X
+encode = ['StudyTimeWeekly', 'Absence']
+df_penguins = pd.get_dummies(input_penguins, prefix=encode)
+
+X = df_penguins[1:]
+input_row = df_penguins[:1]
+
