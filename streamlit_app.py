@@ -84,36 +84,20 @@ with st.expander('Input features'):
 # Data preparation
 # Encode categorical variables
 encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Sports', 'Music', 'Volunteering']
-df_encoded = pd.get_dummies(input_data_combined, columns=encode)
 
-X = df_encoded[1:]  # Using all rows except the first one (input row)
-input_row = df_encoded[:1]  # The first row is the input row
+# Check if all columns in 'encode' are present in input_data_combined
+missing_cols = [col for col in encode if col not in input_data_combined.columns]
+if missing_cols:
+    st.error(f"Columns missing in input_data_combined: {missing_cols}")
+else:
+    df_encoded = pd.get_dummies(input_data_combined, columns=encode)
 
-# Encode y (if needed)
-# For demonstration, assuming GradeClass is already numeric. If not, apply appropriate encoding.
+    # Proceed with the rest of the code
+    X = df_encoded[1:]  # Using all rows except the first one (input row)
+    input_row = df_encoded[:1]  # The first row is the input row
 
-with st.expander('Data preparation'):
-    st.write('**Encoded X (input student data)**')
-    input_row
-    st.write('**Encoded y**')
-    y
-
-# Model training and inference
-## Train the ML model
-clf = RandomForestClassifier()
-clf.fit(X, y)
-
-## Apply model to make predictions
-prediction = clf.predict(input_row)
-prediction_proba = clf.predict_proba(input_row)
-
-# Display predicted class and probabilities
-df_prediction_proba = pd.DataFrame(prediction_proba, columns=['A', 'B', 'C', 'D', 'F'])
-
-st.subheader('Predicted Grade Class')
-st.dataframe(df_prediction_proba)
-
-grade_classes = np.array(['A', 'B', 'C', 'D', 'F'])
-st.success(f'The predicted grade class is: {grade_classes[prediction][0]}')
+    with st.expander('Data preparation'):
+        st.write('**Encoded X (input student data)**')
+        input_row
 
 
