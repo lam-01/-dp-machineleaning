@@ -84,7 +84,7 @@ with st.expander('Input features'):
 # Data preparation
 # Encode categorical variables
 encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Sports', 'Music', 'Volunteering']
-df_encoded = pd.get_dummies(input_data_combined, columns=encode)
+df_encoded = pd.get_dummies(input_penguins, columns=encode)
 
 # X = df_encoded[1:]  # Using all rows except the first one (input row)
 # input_row = df_encoded[:1]  # The first row is the input row
