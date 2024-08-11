@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
 
 st.title('🤖 Machine Learning App')
 
@@ -84,20 +84,8 @@ with st.expander('Input features'):
 # Data preparation
 # Encode categorical variables
 encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Sports', 'Music', 'Volunteering']
+df_encoded = pd.get_dummies(input_data_combined, columns=encode)
 
-# Check if all columns in 'encode' are present in input_data_combined
-missing_cols = [col for col in encode if col not in input_data_combined.columns]
-if missing_cols:
-    st.error(f"Columns missing in input_data_combined: {missing_cols}")
-else:
-    df_encoded = pd.get_dummies(input_data_combined, columns=encode)
-
-    # Proceed with the rest of the code
-    X = df_encoded[1:]  # Using all rows except the first one (input row)
-    input_row = df_encoded[:1]  # The first row is the input row
-
-    with st.expander('Data preparation'):
-        st.write('**Encoded X (input student data)**')
-        input_row
-
+# X = df_encoded[1:]  # Using all rows except the first one (input row)
+# input_row = df_encoded[:1]  # The first row is the input row
 
