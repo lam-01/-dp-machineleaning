@@ -88,4 +88,9 @@ df_encoded = pd.get_dummies(input_penguins, columns=encode)
 
 # X = df_encoded[1:]  # Using all rows except the first one (input row)
 # input_row = df_encoded[:1]  # The first row is the input row
+with st.expander('Data preparation'):
+    st.write('**Encoded X (input student data)**')
+    input_row
+    st.write('**Encoded y**')
+    y
 
