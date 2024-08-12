@@ -3,23 +3,22 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
-st.title('🤖 Machine Learning App')
+st.title(' Machine Learning App')
 
 st.info('This is app builds a machine learning model!')
 
 with st.expander('Data'):
   st.write('**Raw data**')
   df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
-  df
-
+  st.dataframe(df)
 
 st.write('**X**')
-X=df.drop('StudentID',axis=1)
-X
+X_drop=df.drop('StudentID',axis=1)
+X_drop
 
 st.write('**y**')
-y=df.StudentID
-y
+y_drop=df.StudentID
+y_drop
 
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='Absences', y='GPA', color='GradeClass')
@@ -73,24 +72,38 @@ with st.sidebar:
        
     }
 
-    input_df = pd.DataFrame(data, index=[0])
-    input_penguins = pd.concat([input_df, X], axis=0)
+
+  input_df = pd.DataFrame(data, index=[0])
+  input_penguins = pd.concat([input_df, X], axis=0)
 
 with st.expander('Input features'):
-    st.write('**Input data**')
-    st.dataframe(input_df)
-    st.write('**Combined data**')
-    st.dataframe(input_penguins)
+  st.write('**Input data**')
+  st.dataframe(input_df)
+  st.write('**Combined data**')
+  st.dataframe(input_penguins)
+
 # Data preparation
 # Encode categorical variables
-encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Sports', 'Music', 'Volunteering']
+encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Volunteering']
 df_encoded = pd.get_dummies(input_penguins, columns=encode)
 
-# X = df_encoded[1:]  # Using all rows except the first one (input row)
-# input_row = df_encoded[:1]  # The first row is the input row
+X = df_encoded[1:]  # Using all rows except the first one (input row)
+input_row = df_encoded[:1]  # The first row is the input row
+
+# Create and train the Random Forest Regressor model
+model = RandomForestRegressor()
+model.fit(X, y_drop)  # Assuming y_drop is the target variable (GPA)
+
+# Make prediction on the input row
+prediction = model.predict(input_row)
+
 with st.expander('Data preparation'):
-    st.write('**Encoded X (input student data)**')
-    input_row
-    st.write('**Encoded y**')
-    y
+  st.write('**Encoded X (input student data)**')
+  st.dataframe(input_row)
+  st.write('**Encoded y**')
+  st.dataframe(y_drop)  # Assuming y_drop is displayed here
+
+with st.expander('Prediction'):
+  st.write('Predicted GPA for the input student:')
+  st.write(prediction[0])
 
