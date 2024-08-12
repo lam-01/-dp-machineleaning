@@ -87,8 +87,12 @@ with st.expander('Input features'):
 encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Volunteering']
 df_encoded = pd.get_dummies(input_penguins, columns=encode)
 
+# Define X after encoding and separating data
 X = df_encoded[1:]  # Using all rows except the first one (input row)
 input_row = df_encoded[:1]  # The first row is the input row
+
+# Concatenate input_df and X
+input_penguins = pd.concat([input_df, X], axis=0)
 
 # Create and train the Random Forest Regressor model
 model = RandomForestRegressor()
