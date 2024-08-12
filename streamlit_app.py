@@ -73,8 +73,8 @@ with st.sidebar:
     }
 
 
-  input_df = pd.DataFrame(data, index=[0])
-  input_penguins = pd.concat([input_df, X], axis=0)
+input_df = pd.DataFrame(data, index=[0])
+input_penguins = pd.concat([input_df, X], axis=0)
 
 with st.expander('Input features'):
   st.write('**Input data**')
