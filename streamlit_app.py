@@ -1,113 +1,73 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+from imblearn.over_sampling import SMOTE
 
-st.title(' Machine Learning App')
+# Tiêu đề ứng dụng
+st.title("Phân Tích và Dự Báo Điểm GPA")
 
-st.info('This is app builds a machine learning model!')
+# Tải dữ liệu
+@st.cache
+def load_data():
+    # Tạo một DataFrame ví dụ
+    df = pd.read_csv("your_data.csv")
+    return df
 
-with st.expander('Data'):
-  st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
-  st.dataframe(df)
+df = load_data()
 
-st.write('**X**')
-X_drop=df.drop('StudentID',axis=1)
-X_drop
+# Hiển thị dữ liệu ban đầu
+st.subheader("Dữ liệu ban đầu")
+st.write(df.head())
 
-st.write('**y**')
-y_drop=df.StudentID
-y_drop
+# Phân tách dữ liệu
+st.subheader("Phân tách dữ liệu")
+X = df[['StudyTimeWeekly', 'Absences']]
+y = df['GPA']
 
-with st.expander('Data visualization'):
-  st.scatter_chart(data=df, x='Absences', y='GPA', color='GradeClass')
-  st.scatter_chart(data=df, x='StudyTimeWeekly', y='GPA', color='GradeClass')
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-with st.sidebar:
-    st.header('Input features')
+st.write(f"Train set size: {X_train.shape[0]} samples")
+st.write(f"Test set size: {X_test.shape[0]} samples")
 
-    gender_map = {"Male": 0, "Female": 1}
-    gender_selected = st.selectbox('Gender', ('Male', 'Female'))
-    gender_encoded = gender_map[gender_selected]
+# Áp dụng SMOTE để cân bằng dữ liệu
+smote = SMOTE(sampling_strategy='auto')
+X_res, y_res = smote.fit_resample(X_train, y_train)
 
-    ethnicity_map = {"Caucasian": 0, "African American": 1, "Asian": 2, "Other": 3}
-    ethnicity_selected = st.selectbox('Ethnicity', ('Caucasian', 'African American', 'Asian', 'Other'))
-    ethnicity_encoded = ethnicity_map[ethnicity_selected]
+st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
-    parental_education_map = {"None": 0, "High School": 1, "Some College": 2, "Bachelor": 3, "Higher": 4}
-    parental_education_selected = st.selectbox('ParentalEducation', ('None', 'High School', 'Some College', 'Bachelor', 'Higher'))
-    parental_education_encoded = parental_education_map[parental_education_selected]
+# Huấn luyện mô hình Linear Regression
+lr = LinearRegression()
+lr.fit(X_res, y_res)
+y_pred = lr.predict(X_test)
 
-    tutoring_map = {"Yes": 1, "No": 0}
-    tutoring_selected = st.selectbox('Tutoring', ('Yes', 'No'))
-    tutoring_encoded = tutoring_map[tutoring_selected]
+# Hiển thị kết quả
+st.subheader("Kết quả Linear Regression")
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+st.write(f"Mean Squared Error: {mse}")
+st.write(f"R2 Score: {r2}")
 
-    parental_support_map = {"None": 0, "Low": 1, "Moderate": 2, "High": 3, "Very High": 4}
-    parental_support_selected = st.selectbox('ParentalSupport', ('None', 'Low', 'Moderate', 'High', 'Very High'))
-    parental_support_encoded = parental_support_map[parental_support_selected]
+# Huấn luyện mô hình Random Forest
+rf = RandomForestRegressor(n_estimators=100, random_state=42)
+rf.fit(X_res, y_res)
+y_pred_rf = rf.predict(X_test)
 
-    extracurricular_map = {"Yes": 1, "No": 0}
-    extracurricular_selected = st.selectbox('Extracurricular', ('Yes', 'No'))
-    extracurricular_encoded = extracurricular_map[extracurricular_selected]
+# Hiển thị kết quả
+st.subheader("Kết quả Random Forest")
+mse_rf = mean_squared_error(y_test, y_pred_rf)
+r2_rf = r2_score(y_test, y_pred_rf)
+st.write(f"Mean Squared Error: {mse_rf}")
+st.write(f"R2 Score: {r2_rf}")
 
-    volunteering_map = {"Yes": 1, "No": 0}
-    volunteering_selected = st.selectbox('Volunteering', ('Yes', 'No'))
-    volunteering_encoded = volunteering_map[volunteering_selected]
+# Trực quan hóa dữ liệu
+st.subheader("Trực quan hóa dữ liệu")
 
-    study_time_weekly = st.number_input('Study Time Weekly (hours)', min_value=0, max_value=20)
-    absences = st.number_input('Absences', min_value=0, max_value=30)
-
-    # Create a DataFrame for the input features
-    data = {
-        'Gender': gender_encoded,
-        'Ethnicity': ethnicity_encoded,
-        'ParentalEducation': parental_education_encoded,
-        'Tutoring': tutoring_encoded,
-        'ParentalSupport': parental_support_encoded,
-        'Extracurricular': extracurricular_encoded,
-        'Volunteering': volunteering_encoded,
-        'StudyTimeWeekly': study_time_weekly,
-        'Absences': absences,
-       
-    }
-
-
-input_df = pd.DataFrame(data, index=[0])
-input_penguins = pd.concat([input_df, X], axis=0)
-
-with st.expander('Input features'):
-  st.write('**Input data**')
-  st.dataframe(input_df)
-  st.write('**Combined data**')
-  st.dataframe(input_penguins)
-
-# Data preparation
-# Encode categorical variables
-encode = ['Gender', 'Ethnicity', 'ParentalEducation', 'Tutoring', 'ParentalSupport', 'Extracurricular', 'Volunteering']
-df_encoded = pd.get_dummies(input_penguins, columns=encode)
-
-# Define X after encoding and separating data
-X = df_encoded[1:]  # Using all rows except the first one (input row)
-input_row = df_encoded[:1]  # The first row is the input row
-
-# Concatenate input_df and X
-input_penguins = pd.concat([input_df, X], axis=0)
-
-# Create and train the Random Forest Regressor model
-model = RandomForestRegressor()
-model.fit(X, y_drop)  # Assuming y_drop is the target variable (GPA)
-
-# Make prediction on the input row
-prediction = model.predict(input_row)
-
-with st.expander('Data preparation'):
-  st.write('**Encoded X (input student data)**')
-  st.dataframe(input_row)
-  st.write('**Encoded y**')
-  st.dataframe(y_drop)  # Assuming y_drop is displayed here
-
-with st.expander('Prediction'):
-  st.write('Predicted GPA for the input student:')
-  st.write(prediction[0])
-
+fig, ax = plt.subplots()
+sns.scatterplot(x=X['Absences'], y=y, ax=ax)
+plt.title('Absences vs GPA')
+st.pyplot(fig)
