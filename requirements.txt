@@ -2,7 +2,7 @@ streamlit
 numpy
 pandas
 scikit-learn
-spacy
+spacy==3.7.2
 thinc
 smote
 seaborn
