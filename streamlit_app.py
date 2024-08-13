@@ -62,11 +62,11 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
 # Encode y
-target_mapper = {'0': A ,
-                 '1': 'B' ,
-                 '2': 'C' ,
-                 '3': 'D' ,
-                 '4': 'F' ,
+target_mapper = {'0' ,
+                 '1' ,
+                 '2' ,
+                 '3' ,
+                 '4' ,
                 }
 y = y_raw.map(target_mapper)
 
