@@ -11,10 +11,17 @@ from sklearn.neighbors import KNeighborsRegressor
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
 import pickle
+# import spacy
+
+# from sklearn.feature_extraction.text import CountVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
+
+# from gensim import models
+# from gensim.models import Phrases
+# from gensim.models.phrases import Phraser
 
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
-# Đọc dữ liệu
 with st.expander('Data'):
     st.write('**Raw data**')
     df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
@@ -32,20 +39,10 @@ df_encoded = pd.get_dummies(df, columns=cat_cols, drop_first=True)
 st.write("Dữ liệu sau khi áp dụng One-Hot Encoding:")
 st.write(df_encoded.head())
 
-# Định nghĩa biến đầu vào X và biến đầu ra y
+# Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
-X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)  # Biến đầu vào
-y_raw = df_encoded['GradeClass']  # Biến đầu ra gốc
-
-# Mã hóa biến đầu ra y
-target_mapper = {
-    'A': 0,
-    'B': 1,
-    'C': 2,
-    'D': 3,
-    'F': 4
-}
-y = y_raw.map(target_mapper)
+X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
+y = df_encoded['GradeClass']
 
 st.write("Biến đầu vào (X):")
 st.write(X.head())
@@ -53,7 +50,6 @@ st.write(X.head())
 st.write("Biến đầu ra (y):")
 st.write(y.head())
 
-# Phân chia dữ liệu thành tập huấn luyện và tập kiểm tra
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
@@ -65,10 +61,23 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
-# Hiển thị dữ liệu đã cân bằng
-st.write("Dữ liệu sau khi cân bằng:")
-st.write(pd.Series(y_res).value_counts())
+# Encode y
+target_mapper = {'0': A ,
+                 '1': B ,
+                 '2': C ,
+                 '3': D ,
+                 '4': F ,
+                }
+def target_encode(val):
+  return target_mapper[val]
 
+y = y_raw.apply(target_encode)
+
+with st.expander('Data preparation'):
+  st.write('**Encoded X (input penguin)**')
+  X
+  st.write('**Encoded y**')
+  y
 
 ######################################### LOAD MÔ HÌNH ###########################################
 
