@@ -130,5 +130,9 @@ predictions = clf.predict(X_test)
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
-df_prediction_proba.columns = ['A', 'B', 'C','D','F']
+num_classes = prediction_proba.shape[1]  # Số lượng lớp
+column_names = [f'Prob_Class_{i}' for i in range(num_classes)]
+df_prediction_proba.columns = column_names
+st.write("Xác suất dự đoán:")
+st.dataframe(df_prediction_proba)
 
