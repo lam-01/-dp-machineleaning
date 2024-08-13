@@ -61,6 +61,8 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
 st.write(f"Test set size: {X_test.shape[0]} samples")
+st.write(f"Train set size: {y_train.shape[0]} samples")
+st.write(f"Test set size: {y_test.shape[0]} samples")
 
 
  
@@ -129,7 +131,7 @@ clf.fit(X_train, y_train)
 
 ## Hàm dự đoán 
 # Dự đoán giá trị đầu ra
-predictions = clf.predict(y_test)  
+predictions = clf.predict(X_test)  
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
