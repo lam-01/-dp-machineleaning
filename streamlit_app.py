@@ -86,14 +86,14 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
 ######################################### LOAD MÔ HÌNH ###########################################
 
 # Load các mô hình hồi quy đã huấn luyện
-with open('linear_regression_model.pkl', 'rb') as f:
-    linear_regression_model = pickle.load(f)
+# with open('linear_regression_model.pkl', 'rb') as f:
+#     linear_regression_model = pickle.load(f)
 
-with open('random_forest_model.pkl', 'rb') as f:
-    random_forest_model = pickle.load(f)
+# with open('random_forest_model.pkl', 'rb') as f:
+#     random_forest_model = pickle.load(f)
 
-with open('svr_model.pkl', 'rb') as f:
-    svr_model = pickle.load(f)
+# with open('svr_model.pkl', 'rb') as f:
+#     svr_model = pickle.load(f)
   # Tên mô hình
 
 models = {
