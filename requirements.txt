@@ -3,6 +3,7 @@ numpy
 pandas
 scikit-learn
 spacy
+thinc
 smote
 seaborn
 matplotlib
