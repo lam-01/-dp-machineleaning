@@ -118,13 +118,13 @@ def main():
         'Absences': absences,
        
     }
-     try:
-      input_df = encode_features(data)
-      if st.button('Predict!'):
-        prediction = clf.predict(input_df)[0]  # Assuming single prediction
-        st.success(f'Predicted GPA: {prediction:.2f}')  # Format prediction with 2 decimals
-    except ValueError:
-      st.error("Please enter valid numerical values for Study Time Weekly and Absences.")
+    #  try:
+    #   input_df = encode_features(data)
+    #   if st.button('Predict!'):
+    #     prediction = clf.predict(input_df)[0]  # Assuming single prediction
+    #     st.success(f'Predicted GPA: {prediction:.2f}')  # Format prediction with 2 decimals
+    # except ValueError:
+    #   st.error("Please enter valid numerical values for Study Time Weekly and Absences.")
 
      # if st.button('Predict!'):
      #      st.success(f'Predicted GPA: {predictions}')
@@ -140,8 +140,8 @@ def main():
 #   st.dataframe(input_penguins)
 
 
-# # Hiển thị kết quả
-# st.write(f"Dự đoán: {predictions}")
+# Hiển thị kết quả
+st.write(f"Dự đoán: {predictions}")
 
 
 
