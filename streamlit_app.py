@@ -124,11 +124,13 @@ with st.expander('Input features'):
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
 
-X_row = df_encoded[:1]
 ## Hàm dự đoán 
-prediction = clf.predict(X_row)
-prediction_proba = clf.predict_proba(X_row)
+# Dự đoán giá trị đầu ra
+predictions = clf.predict(X_test)
 
-df_prediction_proba = pd.DataFrame(prediction_proba)
-df_prediction_proba.columns = ['0', '1', '2','3','4']
-df_prediction_proba.rename(columns={0:'A', 1:'B', 2: 'C', 3:'D', 4:'F'})
+# Đánh giá hiệu suất mô hình
+r2_score = clf.score(X_test, y_test)
+
+# Hiển thị kết quả
+st.write(f"Dự đoán: {predictions}")
+st.write(f"R^2 score: {r2_score:.2f}")
