@@ -60,7 +60,15 @@ smote = SMOTE(sampling_strategy='auto')
 X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
-# Phần dự đoán 
+
+
+# Mô hình 
+clf = RandomForestRegressor(max_depth=2, random_state=42)
+clf.fit(X_train, y_train)
+
+## Hàm dự đoán 
+# Dự đoán giá trị đầu ra
+predictions = clf.predict(X_test)
 def main():
     
  with st.expander('Dự đoán'):
@@ -110,6 +118,8 @@ def main():
         'Absences': absences,
        
     }
+     if st.button('Predict!'):
+          st.success(f'Predicted GPA: {predictions:.2f}')
 
 
 # input_df = pd.DataFrame(data, index=[0])
@@ -122,15 +132,8 @@ def main():
 #   st.dataframe(input_penguins)
 
 
-# Mô hình 
-clf = RandomForestRegressor(max_depth=2, random_state=42)
-clf.fit(X_train, y_train)
-
-## Hàm dự đoán 
-# Dự đoán giá trị đầu ra
-predictions = clf.predict(X_test)
-# Hiển thị kết quả
-st.write(f"Dự đoán: {predictions}")
+# # Hiển thị kết quả
+# st.write(f"Dự đoán: {predictions}")
 
 
 
