@@ -8,6 +8,14 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 #from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
+import spacy
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+from gensim import models
+from gensim.models import Phrases
+from gensim.models.phrases import Phraser
 
 # Tiêu đề ứng dụng
 st.title("Phân Tích và Dự Báo Điểm GPA")
@@ -51,6 +59,8 @@ st.write(f"Test set size: {X_test.shape[0]} samples")
 # lr = LinearRegression()
 # lr.fit(X_res, y_res)
 # y_pred = lr.predict(X_test)
+
+
 # Mô hình tiền xử lý ngôn ngữ của Spacy (dùng cho kỹ thuật Lemmatization)
 with open('spacy_nlp.pkl', 'rb') as f:
     spacy_nlp = pickle.load(f)
