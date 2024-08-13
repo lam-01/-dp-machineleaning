@@ -7,7 +7,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from imblearn.over_sampling import SMOTE
-
+import pandas_profiling
+import streamlit_pandas_profiling
 # Tiêu đề ứng dụng
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
