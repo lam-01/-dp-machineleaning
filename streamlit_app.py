@@ -64,3 +64,6 @@ st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
+# Đánh giá mô hình trên tập kiểm tra
+score = clf.score(X_test, y_test)
+st.write(f"Model Accuracy: {score:.2f}")
