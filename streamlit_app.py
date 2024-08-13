@@ -129,7 +129,7 @@ clf.fit(X_train, y_train)
 
 ## Hàm dự đoán 
 # Dự đoán giá trị đầu ra
-predictions = clf.predict(X_test)  
+predictions = clf.predict(y_test)  
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
