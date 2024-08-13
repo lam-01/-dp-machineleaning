@@ -57,13 +57,11 @@ X_res, y_res = smote.fit_resample(X, y)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
+# chia tập dữ liệu 
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42)
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
 st.write(f"Test set size: {X_test.shape[0]} samples")
-st.write(f"Train set size: {y_train.shape[0]} samples")
-st.write(f"Test set size: {y_test.shape[0]} samples")
-
 
  
 # Xây dựng
@@ -129,10 +127,18 @@ with st.expander('Input features'):
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
 
-## Hàm dự đoán 
-# Dự đoán giá trị đầu ra
-predictions = clf.predict(X_test)  
-# Hiển thị kết quả
-st.write(f"Dự đoán: {predictions}")
+# ## Hàm dự đoán 
+# # Dự đoán giá trị đầu ra
+# predictions = clf.predict(X_test)  
+# # Hiển thị kết quả
+# st.write(f"Dự đoán: {predictions}")
+# Hàm dự đoán
+def predict_gpa(model, input_features):
+    prediction = model.predict(input_features)
+    return prediction[0]
 
+# Dự đoán GPA khi nhấn nút Predict
+if st.button('Predict GPA'):
+    gpa_prediction = predict_gpa(clf, input_df)
+    st.success(f'Predicted GPA: {gpa_prediction:.2f}')
 
