@@ -139,6 +139,6 @@ def predict_gpa(model, X_test):
 
 # Dự đoán GPA khi nhấn nút Predict
 if st.button('Predict GPA'):
-    gpa_prediction = predict_gpa(clf, input_df)
+    gpa_prediction = predict_gpa(X_test, input_df)
     st.success(f'Predicted GPA: {gpa_prediction:.2f}')
 
