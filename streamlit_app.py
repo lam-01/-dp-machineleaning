@@ -41,7 +41,7 @@ st.write(df_encoded.head())
 
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
-X = df_encoded.drop('StudentID','GradeClass', axis=1)
+X = df_encoded.drop('StudentID,GradeClass', axis=1)
 y = df_encoded['GradeClass']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
