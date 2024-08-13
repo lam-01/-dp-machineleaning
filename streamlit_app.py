@@ -130,6 +130,5 @@ predictions = clf.predict(X_test)
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
-df_prediction_proba.columns = ['0.0', '1.0', '2.0','3.0','4.0']
-df_prediction_proba.rename(columns={'A':0.0, 'B':1.0,'C':2.0, 'D':3.0, 'F':4.0})
+df_prediction_proba.columns = ['A', 'B', 'C','D','F']
 
