@@ -76,7 +76,7 @@ clf.fit(X_train, y_train)
 ## Hàm dự đoán 
 # Dự đoán giá trị đầu ra
 predictions = clf.predict(y_test)
-    
+def main():    
  with st.sidebar('Dự đoán'):
     st.header('Input features')
 
