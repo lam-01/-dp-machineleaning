@@ -134,7 +134,3 @@ predictions = clf.predict(X_test)
 st.write(f"Dự đoán: {predictions}")
 
 
-
-if __name__ == '__main__':
-    main()  
-
