@@ -13,7 +13,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from gensim import models
+#from gensim import models
 from gensim.models import Phrases
 from gensim.models.phrases import Phraser
 
