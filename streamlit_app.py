@@ -33,8 +33,8 @@ st.write(df_encoded.head())
 
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
-X = df_encoded.drop('GPA', axis=1)
-y = df_encoded['GPA']
+X = df_encoded.drop('StudentID','GradeClass, axis=1)
+y = df_encoded['GradeClass']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -51,7 +51,28 @@ st.write(f"Test set size: {X_test.shape[0]} samples")
 # lr = LinearRegression()
 # lr.fit(X_res, y_res)
 # y_pred = lr.predict(X_test)
+# Mô hình tiền xử lý ngôn ngữ của Spacy (dùng cho kỹ thuật Lemmatization)
+with open('spacy_nlp.pkl', 'rb') as f:
+    spacy_nlp = pickle.load(f)
+
+# Mô hình tạo các từ ghép 2 chữ (Bigrams)
+with open('bigrams_phraser.pkl', 'rb') as f:
+    bigrams_phraser = pickle.load(f)
+    
+# Mô hình tạo các từ ghép 3 chữ (Trigrams)
+with open('trigrams_phraser.pkl', 'rb') as f:
+    trigrams_phraser = pickle.load(f)
+
+# Mô hình vectơ hóa bằng kỹ thuật Bag of Word
+with open('bow_vectorizer.pkl', 'rb') as f:
+    bow_vectorizer = pickle.load(f)
+    
+# Mô hình vectơ hóa bằng kỹ thuật TF-IDF
+with open('tfidf_vectorizer.pkl', 'rb') as f:
+    tfidf_vectorizer = pickle.load(f)
+
 ######################################### LOAD MÔ HÌNH ###########################################
+
 # Load các mô hình hồi quy đã huấn luyện
 with open('linear_regression_model.pkl', 'rb') as f:
     linear_regression_model = pickle.load(f)
