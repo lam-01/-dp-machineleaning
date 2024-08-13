@@ -75,10 +75,9 @@ clf.fit(X_train, y_train)
 
 ## Hàm dự đoán 
 # Dự đoán giá trị đầu ra
-predictions = clf.predict(X_test)
-def main():    
+predictions = clf.predict(X_test)   
 
-  with st.sidebar('Dự đoán'):
+with st.sidebar('Dự đoán'):
     st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
