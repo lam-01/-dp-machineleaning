@@ -60,7 +60,7 @@ smote = SMOTE(sampling_strategy='auto')
 X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
-
+# Phần dự đoán 
 with st.expander('Dự đoán'):
     st.header('Input features')
 
@@ -124,9 +124,10 @@ with st.expander('Input features'):
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
 
+X_row = df_encoded[:1]
 ## Hàm dự đoán 
-prediction = clf.predict(y)
-prediction_proba = clf.predict_proba(y)
+prediction = clf.predict(X_row)
+prediction_proba = clf.predict_proba(X_row)
 
 df_prediction_proba = pd.DataFrame(prediction_proba)
 df_prediction_proba.columns = ['0', '1', '2','3','4']
