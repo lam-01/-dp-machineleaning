@@ -1,31 +1,42 @@
 import streamlit as st
 import pandas as pd
-#import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import OneHotEncoder
 
 # Tiêu đề ứng dụng
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
 # Tải dữ liệu
-with st.expander('Data'):
-  st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
-  df
+@st.cache
+def load_data():
+    # Tạo một DataFrame ví dụ
+    df = pd.read_csv("yhttps://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv")
+    return df
 
-# df = load_data()
+df = load_data()
 
 # Hiển thị dữ liệu ban đầu
 st.subheader("Dữ liệu ban đầu")
 st.write(df.head())
 
+# Thực hiện One-Hot Encoding cho các biến phân loại
+st.subheader("Áp dụng One-Hot Encoding cho các biến phân loại")
+cat_cols = ['Sports', 'Volunteering', 'ParentalSupport', 'Music', 'Extracurricular', 'ParentalEducation', 'Gender', 'Tutoring', 'Ethnicity']
+df_encoded = pd.get_dummies(df, columns=cat_cols, drop_first=True)
+
+st.write("Dữ liệu sau khi áp dụng One-Hot Encoding:")
+st.write(df_encoded.head())
+
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
-X = df[['StudyTimeWeekly', 'Absences']]
-y = df['GPA']
+X = df_encoded.drop('GPA', axis=1)
+y = df_encoded['GPA']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
