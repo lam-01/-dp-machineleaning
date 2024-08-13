@@ -4,8 +4,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
 # import spacy
@@ -93,10 +95,14 @@ with open('random_forest_model.pkl', 'rb') as f:
 with open('svr_model.pkl', 'rb') as f:
     svr_model = pickle.load(f)
   # Tên mô hình
-model_names = ['SVM', 
-               'DecisionTree', 
-               'LogisticRegression', 
-               'NaiveBayes']
+
+models = {
+    'Linear Regression': LinearRegression(),
+    'Decision Tree': DecisionTreeRegressor(random_state=42),
+    'Random Forest': RandomForestRegressor(random_state=42),
+    'Support Vector Machine': SVR(),
+    'K-Nearest Neighbors': KNeighborsRegressor(),
+}
 
 # Load các mô hình học máy cho bộ dữ liệu Bag of Word
 bow_models = {}
@@ -135,7 +141,7 @@ def main():
     input_data = [study_time, absences] + ethnicity_encoded + parental_education_encoded + [gender]
 
     # Chọn mô hình dự đoán
-    model_choice = st.selectbox('Choose the regression model', ('Linear Regression', 'Random Forest', 'SVR'))
+    model_choice = st.selectbox('Choose the regression model', ('Linear Regression', 'Decision Tree', 'Random Forest', 'SVR','K-Nearest Neighbors'))
 
     # Dự đoán GPA khi nhấn nút Predict
     if st.button('Predict!'):
