@@ -73,4 +73,4 @@ with st.expander('Data preparation'):
   y
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
-clf.fit(X, y)
+clf.fit(X_res, y)
