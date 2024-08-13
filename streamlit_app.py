@@ -13,13 +13,11 @@ from sklearn.preprocessing import OneHotEncoder
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
 # Tải dữ liệu
-@st.cache
-def load_data():
-    # Tạo một DataFrame ví dụ
-    df = pd.read_csv("yhttps://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv")
-    return df
 
-df = load_data()
+with st.expander('Data'):
+  st.write('**Raw data**')
+  df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
+  df
 
 # Hiển thị dữ liệu ban đầu
 st.subheader("Dữ liệu ban đầu")
