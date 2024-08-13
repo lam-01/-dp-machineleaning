@@ -15,7 +15,7 @@ st.title("Phân Tích và Dự Báo Điểm GPA")
 @st.cache
 def load_data():
     # Tạo một DataFrame ví dụ
-    df = pd.read_csv("your_data.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv")
     return df
 
 df = load_data()
