@@ -80,3 +80,55 @@ fig, ax = plt.subplots()
 sns.scatterplot(x=X['Absences'], y=y, ax=ax)
 plt.title('Absences vs GPA')
 st.pyplot(fig)
+
+######################################### LOAD MÔ HÌNH ###########################################
+# Load các mô hình hồi quy đã huấn luyện
+with open('linear_regression_model.pkl', 'rb') as f:
+    linear_regression_model = pickle.load(f)
+
+with open('random_forest_model.pkl', 'rb') as f:
+    random_forest_model = pickle.load(f)
+
+with open('svr_model.pkl', 'rb') as f:
+    svr_model = pickle.load(f)
+
+# Hàm dự đoán
+def predict_gpa(model, input_data):
+    prediction = model.predict([input_data])
+    return prediction[0]
+
+# Triển khai giao diện Streamlit
+def main():
+    st.title('GPA Prediction')
+    
+    # Input dữ liệu từ người dùng
+    study_time = st.slider('Study Time Weekly', 0, 40, 20)
+    absences = st.slider('Absences', 0, 30, 0)
+    gender = st.selectbox('Gender', ['Male', 'Female'])
+    ethnicity = st.selectbox('Ethnicity', ['Caucasian', 'African American', 'Asian', 'Other'])
+    parental_education = st.selectbox('Parental Education', ['None', 'High School', 'Some College', 'Bachelor\'s', 'Higher'])
+
+    # Chuyển đổi các giá trị phân loại sang định dạng số (OneHotEncoding)
+    gender = 1 if gender == 'Male' else 0
+    ethnicity_encoded = [1, 0, 0, 0]  # Thay bằng mã hóa tương ứng cho các lựa chọn khác nhau
+    parental_education_encoded = [0, 0, 0, 0, 1]  # Tương tự cho giáo dục của cha mẹ
+
+    # Kết hợp tất cả đầu vào thành một vector
+    input_data = [study_time, absences] + ethnicity_encoded + parental_education_encoded + [gender]
+
+    # Chọn mô hình dự đoán
+    model_choice = st.selectbox('Choose the regression model', ('Linear Regression', 'Random Forest', 'SVR'))
+
+    # Dự đoán GPA khi nhấn nút Predict
+    if st.button('Predict!'):
+        if model_choice == 'Linear Regression':
+            gpa = predict_gpa(linear_regression_model, input_data)
+        elif model_choice == 'Random Forest':
+            gpa = predict_gpa(random_forest_model, input_data)
+        else:
+            gpa = predict_gpa(svr_model, input_data)
+        
+        st.success(f'Predicted GPA: {gpa:.2f}')
+
+if __name__ == '__main__':
+    main()
