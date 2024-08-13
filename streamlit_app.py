@@ -47,10 +47,10 @@ st.write(f"Test set size: {X_test.shape[0]} samples")
 
 # st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
-# Huấn luyện mô hình Linear Regression
-lr = LinearRegression()
-lr.fit(X_res, y_res)
-y_pred = lr.predict(X_test)
+# # Huấn luyện mô hình Linear Regression
+# lr = LinearRegression()
+# lr.fit(X_res, y_res)
+# y_pred = lr.predict(X_test)
 ######################################### LOAD MÔ HÌNH ###########################################
 # Load các mô hình hồi quy đã huấn luyện
 with open('linear_regression_model.pkl', 'rb') as f:
