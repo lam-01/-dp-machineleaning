@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 #from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
-import spacy
+#import spacy
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
