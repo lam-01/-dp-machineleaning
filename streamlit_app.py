@@ -42,7 +42,7 @@ st.write(df_encoded.head())
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
 X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
-y_raw = df_encoded['GradeClass']
+y_raw = df_encoded['StudentID']
 
 st.write("Biến đầu vào (X):")
 st.write(X.head())
