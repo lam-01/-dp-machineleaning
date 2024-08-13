@@ -62,11 +62,6 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
-
-# Mô hình tiền xử lý ngôn ngữ của Spacy (dùng cho kỹ thuật Lemmatization)
-with open('spacy_nlp.pkl', 'rb') as f:
-    spacy_nlp = pickle.load(f)
-
 ######################################### LOAD MÔ HÌNH ###########################################
 
 #Load các mô hình hồi quy đã huấn luyện
@@ -80,13 +75,13 @@ with open('svr_model.pkl', 'rb') as f:
     svr_model = pickle.load(f)
   # Tên mô hình
 
-models = {
-    'Linear Regression',
-    'Decision Tree',
-    'Random Forest',
-    'Support Vector Machine',
-    'K-Nearest Neighbors'
-}
+# models = {
+#     'Linear Regression',
+#     'Decision Tree',
+#     'Random Forest',
+#     'Support Vector Machine',
+#     'K-Nearest Neighbors'
+# }
 
 # # Load các mô hình học máy cho bộ dữ liệu Bag of Word
 # bow_models = {}
