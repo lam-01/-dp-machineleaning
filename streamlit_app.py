@@ -10,6 +10,7 @@ from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
+import pickle
 # import spacy
 
 # from sklearn.feature_extraction.text import CountVectorizer
@@ -19,15 +20,12 @@ from sklearn.preprocessing import OneHotEncoder
 # from gensim.models import Phrases
 # from gensim.models.phrases import Phraser
 
-# Tiêu đề ứng dụng
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
-# Tải dữ liệu
-
 with st.expander('Data'):
-  st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
-  df
+    st.write('**Raw data**')
+    df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
+    st.write(df)
 
 # Hiển thị dữ liệu ban đầu
 st.subheader("Dữ liệu ban đầu")
@@ -51,6 +49,7 @@ st.write(X.head())
 
 st.write("Biến đầu ra (y):")
 st.write(y.head())
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
@@ -64,36 +63,29 @@ st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
 ######################################### LOAD MÔ HÌNH ###########################################
 
-#Load các mô hình hồi quy đã huấn luyện
+# Tải các mô hình hồi quy đã huấn luyện
 with open('linear_regression_model.pkl', 'rb') as f:
     linear_regression_model = pickle.load(f)
+
+with open('decision_tree_model.pkl', 'rb') as f:
+    decision_tree_model = pickle.load(f)
 
 with open('random_forest_model.pkl', 'rb') as f:
     random_forest_model = pickle.load(f)
 
 with open('svr_model.pkl', 'rb') as f:
     svr_model = pickle.load(f)
-  # Tên mô hình
 
-# models = {
-#     'Linear Regression',
-#     'Decision Tree',
-#     'Random Forest',
-#     'Support Vector Machine',
-#     'K-Nearest Neighbors'
-# }
+with open('knn_model.pkl', 'rb') as f:
+    knn_model = pickle.load(f)
 
-# # Load các mô hình học máy cho bộ dữ liệu Bag of Word
-# bow_models = {}
-# for name in model_names:
-#     with open('bow_'+name+'.pkl', 'rb') as file:
-#         bow_models[name] = pickle.load(file)
-
-# # Load các mô hình học máy cho bộ dữ liệu TF-IDF
-# tfidf_models = {}
-# for name in model_names:
-#     with open('tfidf_'+name+'.pkl', 'rb') as file:
-#         tfidf_models[name] = pickle.load(file)
+models = {
+    'Linear Regression': linear_regression_model,
+    'Decision Tree': decision_tree_model,
+    'Random Forest': random_forest_model,
+    'Support Vector Machine': svr_model,
+    'K-Nearest Neighbors': knn_model
+}
 
 # Hàm dự đoán
 def predict_gpa(model, input_data):
@@ -112,28 +104,21 @@ def main():
     parental_education = st.selectbox('Parental Education', ['None', 'High School', 'Some College', 'Bachelor\'s', 'Higher'])
 
     # Chuyển đổi các giá trị phân loại sang định dạng số (OneHotEncoding)
-    gender = 1 if gender == 'Male' else 0
+    gender_encoded = 1 if gender == 'Male' else 0
     ethnicity_encoded = [1, 0, 0, 0]  # Thay bằng mã hóa tương ứng cho các lựa chọn khác nhau
     parental_education_encoded = [0, 0, 0, 0, 1]  # Tương tự cho giáo dục của cha mẹ
 
     # Kết hợp tất cả đầu vào thành một vector
-    input_data = [study_time, absences] + ethnicity_encoded + parental_education_encoded + [gender]
+    input_data = [study_time, absences] + ethnicity_encoded + parental_education_encoded + [gender_encoded]
 
     # Chọn mô hình dự đoán
-    model_choice = st.selectbox('Choose the regression model', ('Linear Regression', 'Decision Tree', 'Random Forest', 'SVR','K-Nearest Neighbors'))
+    model_choice = st.selectbox('Choose the regression model', list(models.keys()))
 
     # Dự đoán GPA khi nhấn nút Predict
     if st.button('Predict!'):
-        if model_choice == 'Linear Regression':
-            gpa = predict_gpa(linear_regression_model, input_data)
-        elif model_choice == 'Random Forest':
-            gpa = predict_gpa(random_forest_model, input_data)
-        else:
-            gpa = predict_gpa(svr_model, input_data)
-        
+        model = models[model_choice]
+        gpa = predict_gpa(model, input_data)
         st.success(f'Predicted GPA: {gpa:.2f}')
 
 if __name__ == '__main__':
     main()
-
-
