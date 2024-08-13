@@ -65,7 +65,7 @@ st.write(f"Test set size: {X_test.shape[0]} samples")
 
  
 # Xây dựng
-with st.sidebar('Dự đoán'):
+with st.sidebar:
     st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
@@ -112,16 +112,16 @@ with st.sidebar('Dự đoán'):
         'Absences': absences,
        
     }
-  
 
-# input_df = pd.DataFrame(data, index=[0])
-# input_penguins = pd.concat([input_df, X], axis=0)
 
-# with st.expander('Input features'):
-#   st.write('**Input data**')
-#   st.dataframe(input_df)
-#   st.write('**Combined data**')
-#   st.dataframe(input_penguins)
+input_df = pd.DataFrame(data, index=[0])
+input_penguins = pd.concat([input_df, X], axis=0)
+
+with st.expander('Input features'):
+  st.write('**Input data**')
+  st.dataframe(input_df)
+  st.write('**Combined data**')
+  st.dataframe(input_penguins)
 
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
