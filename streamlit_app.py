@@ -62,21 +62,9 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 st.write(f"Train set size: {X_train.shape[0]} samples")
 st.write(f"Test set size: {X_test.shape[0]} samples")
 
-# # Áp dụng SMOTE để cân bằng dữ liệu
-# smote = SMOTE(sampling_strategy='auto')
-# X_res, y_res = smote.fit_resample(X_train, y_train)
 
-# st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
-
-
-# Mô hình 
-clf = RandomForestRegressor(max_depth=2, random_state=42)
-clf.fit(X_train, y_train)
-
-## Hàm dự đoán 
-# Dự đoán giá trị đầu ra
-predictions = clf.predict(X_test)   
-
+ 
+# Xây dựng
 with st.sidebar('Dự đoán'):
     st.header('Input features')
 
@@ -124,17 +112,7 @@ with st.sidebar('Dự đoán'):
         'Absences': absences,
        
     }
-    #  try:
-    #   input_df = encode_features(data)
-    #   if st.button('Predict!'):
-    #     prediction = clf.predict(input_df)[0]  # Assuming single prediction
-    #     st.success(f'Predicted GPA: {prediction:.2f}')  # Format prediction with 2 decimals
-    # except ValueError:
-    #   st.error("Please enter valid numerical values for Study Time Weekly and Absences.")
-
-     # if st.button('Predict!'):
-     #      st.success(f'Predicted GPA: {predictions}')
-
+  
 
 # input_df = pd.DataFrame(data, index=[0])
 # input_penguins = pd.concat([input_df, X], axis=0)
@@ -145,7 +123,13 @@ with st.sidebar('Dự đoán'):
 #   st.write('**Combined data**')
 #   st.dataframe(input_penguins)
 
+# Mô hình 
+clf = RandomForestRegressor(max_depth=2, random_state=42)
+clf.fit(X_train, y_train)
 
+## Hàm dự đoán 
+# Dự đoán giá trị đầu ra
+predictions = clf.predict(X_test)  
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
