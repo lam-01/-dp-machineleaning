@@ -64,6 +64,11 @@ st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
-# Đánh giá mô hình trên tập kiểm tra
-score = clf.score(X_test, y_test)
-st.write(f"Model Accuracy: {score:.2f}")
+
+## Hàm dự đoán 
+prediction = clf.predict(X)
+prediction_proba = clf.predict_proba(X)
+
+df_prediction_proba = pd.DataFrame(prediction_proba)
+df_prediction_proba.columns = ['0', '1', '2','3','4']
+df_prediction_proba.rename(columns={0:'A', 1:'B', 2: 'C', 3:'D', 4:'F'})
