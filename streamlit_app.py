@@ -72,5 +72,5 @@ with st.expander('Data preparation'):
   st.write('**Encoded y**')
   y
 # Mô hình 
-clf = RandomForestRegressor()
+clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X, y)
