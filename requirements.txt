@@ -6,3 +6,5 @@ spacy
 smote
 seaborn
 matplotlib
+imbalanced-learn
+
