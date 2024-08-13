@@ -41,9 +41,14 @@ st.write(df_encoded.head())
 
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
-X = df_encode.drop(['GradeClass', 'StudentID'], axis=1)
-y = df_encode['GradeClass']
+X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
+y = df_encoded['GradeClass']
 
+st.write("Biến đầu vào (X):")
+st.write(X.head())
+
+st.write("Biến đầu ra (y):")
+st.write(y.head())
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
