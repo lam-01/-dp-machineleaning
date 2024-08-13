@@ -42,15 +42,15 @@ st.write(df_encoded.head())
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
 X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
-y_raw = df_encoded['GradeClass']
+y = df_encoded['GradeClass']
 
 st.write("Biến đầu vào (X):")
 st.write(X.head())
 
 st.write("Biến đầu ra (y):")
-st.write(y_raw.head())
+st.write(y.head())
 
-X_train, X_test, y_train, y_test = train_test_split(X, y_raw, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 st.write(f"Train set size: {X_train.shape[0]} samples")
 st.write(f"Test set size: {X_test.shape[0]} samples")
@@ -61,16 +61,6 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
-# Encode y
-target_mapper = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0
-                }
-y = y_raw.map(target_mapper)
-
-with st.expander('Data preparation'):
-  st.write('**Encoded X (input penguin)**')
-  X
-  st.write('**Encoded y**')
-  y
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
-clf.fit(X_res, y)
+clf.fit(X_train, y_train)
