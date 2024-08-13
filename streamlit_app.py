@@ -12,15 +12,14 @@ from imblearn.over_sampling import SMOTE
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
 # Tải dữ liệu
-@st.cache
-def load_data():
-    # Tạo một DataFrame ví dụ
-    df = pd.read_csv("https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv")
-    return df
-   st.write('**X**')
-  X_raw = df.drop('StudentID', axis=1)
-  X_raw
+with st.expander('Data'):
+  st.write('**Raw data**')
+  df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
+  df
 
+  st.write('**X**')
+  X_raw = df.drop('species', axis=1)
+  X_raw
 # df = load_data()
 
 # # Hiển thị dữ liệu ban đầu
