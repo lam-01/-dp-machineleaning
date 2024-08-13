@@ -118,8 +118,16 @@ def main():
         'Absences': absences,
        
     }
-     if st.button('Predict!'):
-          st.success(f'Predicted GPA: {predictions}')
+     try:
+      input_df = encode_features(data)
+      if st.button('Predict!'):
+        prediction = clf.predict(input_df)[0]  # Assuming single prediction
+        st.success(f'Predicted GPA: {prediction:.2f}')  # Format prediction with 2 decimals
+    except ValueError:
+      st.error("Please enter valid numerical values for Study Time Weekly and Absences.")
+
+     # if st.button('Predict!'):
+     #      st.success(f'Predicted GPA: {predictions}')
 
 
 # input_df = pd.DataFrame(data, index=[0])
