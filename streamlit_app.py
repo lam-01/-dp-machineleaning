@@ -8,14 +8,14 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
-# import spacy
+import spacy
 
-# from sklearn.feature_extraction.text import CountVectorizer
-# from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-# from gensim import models
-# from gensim.models import Phrases
-# from gensim.models.phrases import Phraser
+from gensim import models
+from gensim.models import Phrases
+from gensim.models.phrases import Phraser
 
 # Tiêu đề ứng dụng
 st.title("Phân Tích và Dự Báo Điểm GPA")
