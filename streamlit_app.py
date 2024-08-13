@@ -41,11 +41,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 st.write(f"Train set size: {X_train.shape[0]} samples")
 st.write(f"Test set size: {X_test.shape[0]} samples")
 
-# Áp dụng SMOTE để cân bằng dữ liệu
-smote = SMOTE(sampling_strategy='auto')
-X_res, y_res = smote.fit_resample(X_train, y_train)
+# # Áp dụng SMOTE để cân bằng dữ liệu
+# smote = SMOTE(sampling_strategy='auto')
+# X_res, y_res = smote.fit_resample(X_train, y_train)
 
-st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
+# st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
 # Huấn luyện mô hình Linear Regression
 lr = LinearRegression()
