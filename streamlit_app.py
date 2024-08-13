@@ -42,7 +42,7 @@ st.write(df_encoded.head())
 # Phân tách dữ liệu
 st.subheader("Phân tách dữ liệu")
 X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
-y_raw = df_encoded['StudentID']
+y_raw = df_encoded['GradeClass']
 
 st.write("Biến đầu vào (X):")
 st.write(X.head())
@@ -50,16 +50,16 @@ st.write(X.head())
 st.write("Biến đầu ra (y):")
 st.write(y_raw.head())
 
-X_train, X_test, y_train, y_test = train_test_split(X, y_raw, test_size=0.2, random_state=42)
+# X_train, X_test, y_train, y_test = train_test_split(X, y_raw, test_size=0.2, random_state=42)
 
-st.write(f"Train set size: {X_train.shape[0]} samples")
-st.write(f"Test set size: {X_test.shape[0]} samples")
+# st.write(f"Train set size: {X_train.shape[0]} samples")
+# st.write(f"Test set size: {X_test.shape[0]} samples")
 
-# Áp dụng SMOTE để cân bằng dữ liệu
-smote = SMOTE(sampling_strategy='auto')
-X_res, y_res = smote.fit_resample(X_train, y_train)
+# # Áp dụng SMOTE để cân bằng dữ liệu
+# smote = SMOTE(sampling_strategy='auto')
+# X_res, y_res = smote.fit_resample(X_train, y_train)
 
-st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
+# st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
 # Encode y
 target_mapper = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0
@@ -71,4 +71,14 @@ with st.expander('Data preparation'):
   X
   st.write('**Encoded y**')
   y
+    X_train, X_test, y_train, y_test = train_test_split(X, y_raw, test_size=0.2, random_state=42)
+
+st.write(f"Train set size: {X_train.shape[0]} samples")
+st.write(f"Test set size: {X_test.shape[0]} samples")
+
+# Áp dụng SMOTE để cân bằng dữ liệu
+smote = SMOTE(sampling_strategy='auto')
+X_res, y_res = smote.fit_resample(X_train, y_train)
+
+st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
