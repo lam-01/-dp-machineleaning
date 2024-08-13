@@ -133,8 +133,8 @@ clf.fit(X_train, y_train)
 # # Hiển thị kết quả
 # st.write(f"Dự đoán: {predictions}")
 # Hàm dự đoán
-def predict_gpa(model, input_features):
-    prediction = model.predict(input_features)
+def predict_gpa(model, X_test):
+    prediction = model.predict(X_test)
     return prediction[0]
 
 # Dự đoán GPA khi nhấn nút Predict
