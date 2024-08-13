@@ -119,7 +119,7 @@ def main():
        
     }
      if st.button('Predict!'):
-          st.success(f'Predicted GPA: {predictions:.2f}')
+          st.success(f'Predicted GPA: {predictions}')
 
 
 # input_df = pd.DataFrame(data, index=[0])
