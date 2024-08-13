@@ -127,10 +127,5 @@ clf.fit(X_train, y_train)
 ## Hàm dự đoán 
 # Dự đoán giá trị đầu ra
 predictions = clf.predict(X_test)
-
-# Đánh giá hiệu suất mô hình
-r2_score = clf.score(X_test, y_test)
-
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
-st.write(f"R^2 score: {r2_score:.2f}")
