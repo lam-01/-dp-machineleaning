@@ -129,3 +129,7 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
+
+df_prediction_proba.columns = ['0', '1', '2','3','4']
+df_prediction_proba.rename(columns={0:'A', 1: 'B', 2:'C', 3:'D', 4:'F'})
+
