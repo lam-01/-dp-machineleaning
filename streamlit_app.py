@@ -66,25 +66,25 @@ st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 # y_pred = lr.predict(X_test)
 
 
-# Mô hình tiền xử lý ngôn ngữ của Spacy (dùng cho kỹ thuật Lemmatization)
-with open('spacy_nlp.pkl', 'rb') as f:
-    spacy_nlp = pickle.load(f)
+# # Mô hình tiền xử lý ngôn ngữ của Spacy (dùng cho kỹ thuật Lemmatization)
+# with open('spacy_nlp.pkl', 'rb') as f:
+#     spacy_nlp = pickle.load(f)
 
-# Mô hình tạo các từ ghép 2 chữ (Bigrams)
-with open('bigrams_phraser.pkl', 'rb') as f:
-    bigrams_phraser = pickle.load(f)
+# # Mô hình tạo các từ ghép 2 chữ (Bigrams)
+# with open('bigrams_phraser.pkl', 'rb') as f:
+#     bigrams_phraser = pickle.load(f)
     
-# Mô hình tạo các từ ghép 3 chữ (Trigrams)
-with open('trigrams_phraser.pkl', 'rb') as f:
-    trigrams_phraser = pickle.load(f)
+# # Mô hình tạo các từ ghép 3 chữ (Trigrams)
+# with open('trigrams_phraser.pkl', 'rb') as f:
+#     trigrams_phraser = pickle.load(f)
 
-# Mô hình vectơ hóa bằng kỹ thuật Bag of Word
-with open('bow_vectorizer.pkl', 'rb') as f:
-    bow_vectorizer = pickle.load(f)
+# # Mô hình vectơ hóa bằng kỹ thuật Bag of Word
+# with open('bow_vectorizer.pkl', 'rb') as f:
+#     bow_vectorizer = pickle.load(f)
     
-# Mô hình vectơ hóa bằng kỹ thuật TF-IDF
-with open('tfidf_vectorizer.pkl', 'rb') as f:
-    tfidf_vectorizer = pickle.load(f)
+# # Mô hình vectơ hóa bằng kỹ thuật TF-IDF
+# with open('tfidf_vectorizer.pkl', 'rb') as f:
+#     tfidf_vectorizer = pickle.load(f)
 
 ######################################### LOAD MÔ HÌNH ###########################################
 
