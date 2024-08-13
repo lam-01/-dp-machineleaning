@@ -51,34 +51,6 @@ st.write(f"Test set size: {X_test.shape[0]} samples")
 lr = LinearRegression()
 lr.fit(X_res, y_res)
 y_pred = lr.predict(X_test)
-
-# Hiển thị kết quả
-st.subheader("Kết quả Linear Regression")
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-st.write(f"Mean Squared Error: {mse}")
-st.write(f"R2 Score: {r2}")
-
-# Huấn luyện mô hình Random Forest
-rf = RandomForestRegressor(n_estimators=100, random_state=42)
-rf.fit(X_res, y_res)
-y_pred_rf = rf.predict(X_test)
-
-# Hiển thị kết quả
-st.subheader("Kết quả Random Forest")
-mse_rf = mean_squared_error(y_test, y_pred_rf)
-r2_rf = r2_score(y_test, y_pred_rf)
-st.write(f"Mean Squared Error: {mse_rf}")
-st.write(f"R2 Score: {r2_rf}")
-
-# Trực quan hóa dữ liệu
-st.subheader("Trực quan hóa dữ liệu")
-
-fig, ax = plt.subplots()
-sns.scatterplot(x=X['Absences'], y=y, ax=ax)
-plt.title('Absences vs GPA')
-st.pyplot(fig)
-
 ######################################### LOAD MÔ HÌNH ###########################################
 # Load các mô hình hồi quy đã huấn luyện
 with open('linear_regression_model.pkl', 'rb') as f:
@@ -130,3 +102,32 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# # Hiển thị kết quả
+# st.subheader("Kết quả Linear Regression")
+# mse = mean_squared_error(y_test, y_pred)
+# r2 = r2_score(y_test, y_pred)
+# st.write(f"Mean Squared Error: {mse}")
+# st.write(f"R2 Score: {r2}")
+
+# # Huấn luyện mô hình Random Forest
+# rf = RandomForestRegressor(n_estimators=100, random_state=42)
+# rf.fit(X_res, y_res)
+# y_pred_rf = rf.predict(X_test)
+
+# # Hiển thị kết quả
+# st.subheader("Kết quả Random Forest")
+# mse_rf = mean_squared_error(y_test, y_pred_rf)
+# r2_rf = r2_score(y_test, y_pred_rf)
+# st.write(f"Mean Squared Error: {mse_rf}")
+# st.write(f"R2 Score: {r2_rf}")
+
+# # Trực quan hóa dữ liệu
+# st.subheader("Trực quan hóa dữ liệu")
+
+# fig, ax = plt.subplots()
+# sns.scatterplot(x=X['Absences'], y=y, ax=ax)
+# plt.title('Absences vs GPA')
+# st.pyplot(fig)
+
+
