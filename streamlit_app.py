@@ -60,7 +60,7 @@ smote = SMOTE(sampling_strategy='auto')
 X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
-with st.sidebar:
+with st.expander:
     st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
@@ -125,7 +125,7 @@ clf.fit(X_train, y_train)
 
 ## Hàm dự đoán 
 prediction = clf.predict(X)
-prediction_proba = clf.predict_proba(X)
+prediction_proba = clf.predict_proba(X_train)
 
 df_prediction_proba = pd.DataFrame(prediction_proba)
 df_prediction_proba.columns = ['0', '1', '2','3','4']
