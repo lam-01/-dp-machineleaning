@@ -61,7 +61,9 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 
 st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 # Phần dự đoán 
-with st.expander('Dự đoán'):
+def main():
+    
+ with st.expander('Dự đoán'):
     st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
@@ -110,14 +112,14 @@ with st.expander('Dự đoán'):
     }
 
 
-input_df = pd.DataFrame(data, index=[0])
-input_penguins = pd.concat([input_df, X], axis=0)
+# input_df = pd.DataFrame(data, index=[0])
+# input_penguins = pd.concat([input_df, X], axis=0)
 
-with st.expander('Input features'):
-  st.write('**Input data**')
-  st.dataframe(input_df)
-  st.write('**Combined data**')
-  st.dataframe(input_penguins)
+# with st.expander('Input features'):
+#   st.write('**Input data**')
+#   st.dataframe(input_df)
+#   st.write('**Combined data**')
+#   st.dataframe(input_penguins)
 
 
 # Mô hình 
@@ -130,9 +132,8 @@ predictions = clf.predict(X_test)
 # Hiển thị kết quả
 st.write(f"Dự đoán: {predictions}")
 
-num_classes = prediction_proba.shape[1]  # Số lượng lớp
-column_names = [f'Prob_Class_{i}' for i in range(num_classes)]
-df_prediction_proba.columns = column_names
-st.write("Xác suất dự đoán:")
-st.dataframe(df_prediction_proba)
+
+
+if __name__ == '__main__':
+    main()  
 
