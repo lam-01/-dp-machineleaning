@@ -69,36 +69,36 @@ with open('spacy_nlp.pkl', 'rb') as f:
 
 ######################################### LOAD MÔ HÌNH ###########################################
 
-# Load các mô hình hồi quy đã huấn luyện
-# with open('linear_regression_model.pkl', 'rb') as f:
-#     linear_regression_model = pickle.load(f)
+#Load các mô hình hồi quy đã huấn luyện
+with open('linear_regression_model.pkl', 'rb') as f:
+    linear_regression_model = pickle.load(f)
 
-# with open('random_forest_model.pkl', 'rb') as f:
-#     random_forest_model = pickle.load(f)
+with open('random_forest_model.pkl', 'rb') as f:
+    random_forest_model = pickle.load(f)
 
-# with open('svr_model.pkl', 'rb') as f:
-#     svr_model = pickle.load(f)
+with open('svr_model.pkl', 'rb') as f:
+    svr_model = pickle.load(f)
   # Tên mô hình
 
 models = {
-    'Linear Regression': LinearRegression(),
-    'Decision Tree': DecisionTreeRegressor(random_state=42),
-    'Random Forest': RandomForestRegressor(random_state=42),
-    'Support Vector Machine': SVR(),
-    'K-Nearest Neighbors': KNeighborsRegressor(),
+    'Linear Regression',
+    'Decision Tree',
+    'Random Forest',
+    'Support Vector Machine',
+    'K-Nearest Neighbors'
 }
 
-# Load các mô hình học máy cho bộ dữ liệu Bag of Word
-bow_models = {}
-for name in model_names:
-    with open('bow_'+name+'.pkl', 'rb') as file:
-        bow_models[name] = pickle.load(file)
+# # Load các mô hình học máy cho bộ dữ liệu Bag of Word
+# bow_models = {}
+# for name in model_names:
+#     with open('bow_'+name+'.pkl', 'rb') as file:
+#         bow_models[name] = pickle.load(file)
 
-# Load các mô hình học máy cho bộ dữ liệu TF-IDF
-tfidf_models = {}
-for name in model_names:
-    with open('tfidf_'+name+'.pkl', 'rb') as file:
-        tfidf_models[name] = pickle.load(file)
+# # Load các mô hình học máy cho bộ dữ liệu TF-IDF
+# tfidf_models = {}
+# for name in model_names:
+#     with open('tfidf_'+name+'.pkl', 'rb') as file:
+#         tfidf_models[name] = pickle.load(file)
 
 # Hàm dự đoán
 def predict_gpa(model, input_data):
