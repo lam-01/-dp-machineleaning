@@ -16,9 +16,6 @@ with st.expander('Data'):
   df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
   df
 
-  st.write('**X**')
-  X_raw = df.drop('species', axis=1)
-  X_raw
 # df = load_data()
 
 # Hiển thị dữ liệu ban đầu
