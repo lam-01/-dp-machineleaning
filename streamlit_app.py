@@ -125,8 +125,8 @@ clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
 
 ## Hàm dự đoán 
-prediction = clf.predict(X)
-prediction_proba = clf.predict_proba(X_train)
+prediction = clf.predict(y)
+prediction_proba = clf.predict_proba(y)
 
 df_prediction_proba = pd.DataFrame(prediction_proba)
 df_prediction_proba.columns = ['0', '1', '2','3','4']
