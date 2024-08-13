@@ -110,8 +110,6 @@ def main():
 
     study_time_weekly = st.number_input('Study Time Weekly (hours)', min_value=0, max_value=20)
     absences = st.number_input('Absences', min_value=0, max_value=30)
-     if st.button('Predict!'):
-         st.success(f'Predicted GPA: {predictions}')
 
     # Create a DataFrame for the input features
     data = {
