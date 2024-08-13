@@ -134,11 +134,11 @@ clf.fit(X_train, y_train)
 # st.write(f"Dự đoán: {predictions}")
 # Hàm dự đoán
 def predict_gpa(model, X_test):
-    prediction = mode.predict(X_test)
+    prediction = clf.predict(X_test)
     return prediction[0]
 
 # Dự đoán GPA khi nhấn nút Predict
 if st.button('Predict GPA'):
-    gpa_prediction = predict_gpa(mode, input_df)
+    gpa_prediction = predict_gpa(clf, input_df)
     st.success(f'Predicted GPA: {gpa_prediction:.2f}')
 
