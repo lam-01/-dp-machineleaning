@@ -17,7 +17,7 @@ import pickle
 
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
-# with st.expander('Data'):
+#with st.expander('Data'):
 #     st.write('**Raw data**')
 df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
    #st.write(df)
@@ -60,8 +60,8 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 
  
 # Xây dựng
-# with st.sidebar:
-st.header('Input features')
+ with st.sidebar:
+    st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
     gender_selected = st.selectbox('Gender', ('Male', 'Female'))
@@ -131,9 +131,23 @@ clf.fit(X_train, y_train)
 def predict_gpa(mode, X_test):
     prediction = mode.predict(X_test)
     return prediction[0]
+# Hàm chuyển đổi GPA sang GradeClass
+def gpa_to_grade_class(gpa):
+    if gpa >= 3.5:
+        return 'A'
+    elif gpa >= 3.0:
+        return 'B'
+    elif gpa >= 2.5:
+        return 'C'
+    elif gpa >= 2.0:
+        return 'D'
+    else:
+        return 'F'
 
 # Dự đoán GPA khi nhấn nút Predict
 if st.button('Predict GPA'):
     gpa_prediction = predict_gpa(clf, X_test)
+    grade_class = gpa_to_grade_class(gpa_prediction)
     st.success(f'Predicted GPA: {gpa_prediction:.2f}')
+    st.success(f'Grade Class: {grade_class}')
 
