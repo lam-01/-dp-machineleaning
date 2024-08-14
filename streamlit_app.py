@@ -61,7 +61,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
  
 # Xây dựng
 # with st.sidebar:
-    st.header('Input features')
+st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
     gender_selected = st.selectbox('Gender', ('Male', 'Female'))
