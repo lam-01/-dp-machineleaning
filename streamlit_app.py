@@ -13,18 +13,13 @@ from sklearn.preprocessing import OneHotEncoder
 import pickle
 # import spacy
 
-# from sklearn.feature_extraction.text import CountVectorizer
-# from sklearn.feature_extraction.text import TfidfVectorizer
 
-# from gensim import models
-# from gensim.models import Phrases
-# from gensim.models.phrases import Phraser
 
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
 # with st.expander('Data'):
 #     st.write('**Raw data**')
- df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
    #st.write(df)
 
 # Hiển thị dữ liệu ban đầu
