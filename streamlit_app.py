@@ -25,6 +25,9 @@ df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_per
 # Hiển thị dữ liệu ban đầu
 # st.subheader("Dữ liệu ban đầu")
 # st.write(df.head())
+# with st.expander('Data visualization'):
+#   st.scatter_chart(data=df, x='Abesence', y='GPA', color='GradeClass')
+#   st.scatter_chart(data=df, x='StudyTimeWeekly', y='GPA', color='GradeClass')
 
 # Thực hiện One-Hot Encoding cho các biến phân loại
 # st.subheader("Áp dụng One-Hot Encoding cho các biến phân loại")
@@ -60,7 +63,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 
  
 # Xây dựng
-with st.sidebar:
+with st.container:
     st.header('Input features')
 
     gender_map = {"Male": 0, "Female": 1}
