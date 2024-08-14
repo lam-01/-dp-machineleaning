@@ -22,46 +22,46 @@ import pickle
 
 st.title("Phân Tích và Dự Báo Điểm GPA")
 
-with st.expander('Data'):
-    st.write('**Raw data**')
+# with st.expander('Data'):
+#     st.write('**Raw data**')
     df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
     st.write(df)
 
 # Hiển thị dữ liệu ban đầu
-st.subheader("Dữ liệu ban đầu")
-st.write(df.head())
+# st.subheader("Dữ liệu ban đầu")
+# st.write(df.head())
 
 # Thực hiện One-Hot Encoding cho các biến phân loại
-st.subheader("Áp dụng One-Hot Encoding cho các biến phân loại")
+# st.subheader("Áp dụng One-Hot Encoding cho các biến phân loại")
 cat_cols = ['Sports', 'Volunteering', 'ParentalSupport', 'Music', 'Extracurricular', 'ParentalEducation', 'Gender', 'Tutoring', 'Ethnicity']
 df_encoded = pd.get_dummies(df, columns=cat_cols, drop_first=True)
 
-st.write("Dữ liệu sau khi áp dụng One-Hot Encoding:")
-st.write(df_encoded.head())
+# st.write("Dữ liệu sau khi áp dụng One-Hot Encoding:")
+# st.write(df_encoded.head())
 
 # Phân tách dữ liệu
-st.subheader("Phân tách dữ liệu")
+# st.subheader("Phân tách dữ liệu")
 X = df_encoded.drop(['GradeClass', 'StudentID'], axis=1)
 y = df_encoded['GradeClass']
 
-st.write("Biến đầu vào (X):")
-st.write(X.head())
+# st.write("Biến đầu vào (X):")
+# st.write(X.head())
 
-st.write("Biến đầu ra (y):")
-st.write(y.head())
+# st.write("Biến đầu ra (y):")
+# st.write(y.head())
 
 # Áp dụng SMOTE để cân bằng dữ liệu
 smote = SMOTE(sampling_strategy='auto')
 X_res, y_res = smote.fit_resample(X, y)
 
 
-st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
+# st.write(f"Train set size after SMOTE: {X_res.shape[0]} samples")
 
 # chia tập dữ liệu 
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42)
 
-st.write(f"Train set size: {X_train.shape[0]} samples")
-st.write(f"Test set size: {X_test.shape[0]} samples")
+# st.write(f"Train set size: {X_train.shape[0]} samples")
+# st.write(f"Test set size: {X_test.shape[0]} samples")
 
  
 # Xây dựng
@@ -117,11 +117,11 @@ with st.sidebar:
 input_df = pd.DataFrame(data, index=[0])
 input_penguins = pd.concat([input_df, X], axis=0)
 
-with st.expander('Input features'):
-  st.write('**Input data**')
-  st.dataframe(input_df)
-  st.write('**Combined data**')
-  st.dataframe(input_penguins)
+# with st.expander('Input features'):
+#   st.write('**Input data**')
+#   st.dataframe(input_df)
+#   st.write('**Combined data**')
+#   st.dataframe(input_penguins)
 
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
