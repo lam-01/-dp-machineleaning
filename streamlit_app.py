@@ -24,9 +24,9 @@ st.title("Phân Tích và Dự Báo Điểm GPA")
 
 # with st.expander('Data'):
 #     st.write('**Raw data**')
-with : 
+
     df = pd.read_csv('https://raw.githubusercontent.com/lam-01/Data/main/Student_performance_data_2.csv')
-    st.write(df)
+   #st.write(df)
 
 # Hiển thị dữ liệu ban đầu
 # st.subheader("Dữ liệu ban đầu")
