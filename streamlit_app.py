@@ -148,7 +148,7 @@ def gpa_to_grade_class(gpa):
         return 'F'
 
 # Dự đoán GPA khi nhấn nút Predict
-if st.button('Predict GPA'):
+if st.button('Dự đoán'):
     gpa_prediction = predict_gpa(clf, X_test)
     grade_class = gpa_to_grade_class(gpa_prediction)
     st.success(f'Predicted GPA: {gpa_prediction:.2f}')
