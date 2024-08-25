@@ -15,7 +15,7 @@ import pickle
 
 
 
-st.title("Phân tích và Dự đoán kết quả học tập ")
+st.header("Phân tích và Dự đoán kết quả học tập ")
 
 #with st.expander('Data'):
 #     st.write('**Raw data**')
