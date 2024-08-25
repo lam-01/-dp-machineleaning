@@ -115,21 +115,11 @@ with st.sidebar:
 input_df = pd.DataFrame(data, index=[0])
 input_penguins = pd.concat([input_df, X], axis=0)
 
-# with st.expander('Input features'):
-#   st.write('**Input data**')
-#   st.dataframe(input_df)
-#   st.write('**Combined data**')
-#   st.dataframe(input_penguins)
 
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
 
-# ## Hàm dự đoán 
-# # Dự đoán giá trị đầu ra
-# predictions = clf.predict(X_test)  
-# # Hiển thị kết quả
-# st.write(f"Dự đoán: {predictions}")
 # Hàm dự đoán
 def predict_gpa(mode, X_test):
     prediction = mode.predict(X_test)
