@@ -163,27 +163,27 @@ clf.fit(X_train, y_train)
 # # Huấn luyện mô hình
 # best_rf.fit(X_train, y_train)
 
-# Hàm dự đoán
-def predict_gpa(mode, X_test):
-    prediction = mode.predict(X_test)
-    return prediction[0]
-# Hàm chuyển đổi GPA sang GradeClass
-def gpa_to_grade_class(gpa):
-    if gpa >= 3.5:
-        return 'A'
-    elif gpa >= 3.0:
-        return 'B'
-    elif gpa >= 2.5:
-        return 'C'
-    elif gpa >= 2.0:
-        return 'D'
-    else:
-        return 'F'
+# # Hàm dự đoán
+# def predict_gpa(mode, X_test):
+#     prediction = mode.predict(X_test)
+#     return prediction[0]
+# # Hàm chuyển đổi GPA sang GradeClass
+# def gpa_to_grade_class(gpa):
+#     if gpa >= 3.5:
+#         return 'A'
+#     elif gpa >= 3.0:
+#         return 'B'
+#     elif gpa >= 2.5:
+#         return 'C'
+#     elif gpa >= 2.0:
+#         return 'D'
+#     else:
+#         return 'F'
 
-# Dự đoán GPA khi nhấn nút Predict
-if st.button('Dự đoán'):
-    gpa_prediction = predict_gpa(clf, X_test)
-    grade_class = gpa_to_grade_class(gpa_prediction)
-    st.success(f'Predicted GPA: {gpa_prediction:.2f}')
-    st.success(f'Grade Class: {grade_class}')
+# # Dự đoán GPA khi nhấn nút Predict
+# if st.button('Dự đoán'):
+#     gpa_prediction = predict_gpa(clf, X_test)
+#     grade_class = gpa_to_grade_class(gpa_prediction)
+#     st.success(f'Predicted GPA: {gpa_prediction:.2f}')
+#     st.success(f'Grade Class: {grade_class}')
 
