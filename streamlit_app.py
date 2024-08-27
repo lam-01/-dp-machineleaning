@@ -120,8 +120,8 @@ input_penguins = pd.concat([input_df, X], axis=0)
 
 
 # Mô hình 
-clf = RandomForestRegressor(max_depth=2, random_state=42)
-clf.fit(X_train, y_train)
+# clf = RandomForestRegressor(max_depth=2, random_state=42)
+# clf.fit(X_train, y_train)
 # Tối ưu hóa mô hình: 
 # Định nghĩa các tham số cần tìm kiếm
 param_grid = {
