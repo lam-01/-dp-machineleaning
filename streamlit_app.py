@@ -145,22 +145,22 @@ grid_search.fit(X_train, y_train)
 # In ra các tham số tốt nhất
 print(f"Best parameters: {grid_search.best_params_}")
 
-# # Lấy ra các tham số tốt nhất
-# best_params = grid_search.best_params_
+# Lấy ra các tham số tốt nhất
+best_params = grid_search.best_params_
 
-# # Khởi tạo mô hình với các tham số tốt nhất
-# best_rf = RandomForestRegressor(
-#     n_estimators=best_params['n_estimators'],
-#     max_features=best_params['max_features'],
-#     max_depth=best_params['max_depth'],
-#     min_samples_split=best_params['min_samples_split'],
-#     min_samples_leaf=best_params['min_samples_leaf'],
-#     bootstrap=best_params['bootstrap'],
-#     random_state=42
-# )
+# Khởi tạo mô hình với các tham số tốt nhất
+best_rf = RandomForestRegressor(
+    n_estimators=best_params['n_estimators'],
+    max_features=best_params['max_features'],
+    max_depth=best_params['max_depth'],
+    min_samples_split=best_params['min_samples_split'],
+    min_samples_leaf=best_params['min_samples_leaf'],
+    bootstrap=best_params['bootstrap'],
+    random_state=42
+)
 
-# # Huấn luyện mô hình
-# best_rf.fit(X_train, y_train)
+# Huấn luyện mô hình
+best_rf.fit(X_train, y_train)
 
 # Hàm dự đoán
 def predict_gpa(mode, X_test):
