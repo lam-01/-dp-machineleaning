@@ -183,6 +183,6 @@ def gpa_to_grade_class(gpa):
 if st.button('Dự đoán'):
     gpa_prediction = predict_gpa(clf, X_test)
     grade_class = gpa_to_grade_class(gpa_prediction)
-    st.success(f'Predicted GPA: {gpa_prediction:.2ff}')
+    st.success(f'Predicted GPA: {gpa_prediction:.2f}')
     st.success(f'Grade Class: {grade_class}')
 
