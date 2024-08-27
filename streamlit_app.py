@@ -10,6 +10,7 @@ from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import GridSearchCV
 import pickle
 # import spacy
 
@@ -119,6 +120,46 @@ input_penguins = pd.concat([input_df, X], axis=0)
 # Mô hình 
 clf = RandomForestRegressor(max_depth=2, random_state=42)
 clf.fit(X_train, y_train)
+# Tối ưu hóa mô hình: 
+# Định nghĩa các tham số cần tìm kiếm
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_depth': [10, 20, 30, None],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'bootstrap': [True, False]
+}
+
+# Khởi tạo mô hình RandomForest
+rf = RandomForestRegressor(random_state=42)
+
+# Khởi tạo GridSearchCV
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid,
+                          cv=3, n_jobs=-1, verbose=2, scoring='r2')
+
+# Huấn luyện mô hình
+grid_search.fit(X_train, y_train)
+
+# In ra các tham số tốt nhất
+print(f"Best parameters: {grid_search.best_params_}")
+
+# Lấy ra các tham số tốt nhất
+best_params = grid_search.best_params_
+
+# Khởi tạo mô hình với các tham số tốt nhất
+best_rf = RandomForestRegressor(
+    n_estimators=best_params['n_estimators'],
+    max_features=best_params['max_features'],
+    max_depth=best_params['max_depth'],
+    min_samples_split=best_params['min_samples_split'],
+    min_samples_leaf=best_params['min_samples_leaf'],
+    bootstrap=best_params['bootstrap'],
+    random_state=42
+)
+
+# Huấn luyện mô hình
+best_rf.fit(X_train, y_train)
 
 # Hàm dự đoán
 def predict_gpa(mode, X_test):
