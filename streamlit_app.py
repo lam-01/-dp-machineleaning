@@ -96,7 +96,7 @@ with st.sidebar:
     volunteering_encoded = volunteering_map[volunteering_selected]
 
     #study_time_weekly = st.number_input('Study Time Weekly (hours)', min_value=0, max_value=20)
-    study_time_weekly = st.slider('Study Time Weekly (hours)', 0.00000,20.00000,10.00000)
+    study_time_weekly = st.slider('Study Time Weekly (hours)', 0.00,20.00,10.00)
     absences = st.number_input('Absences', min_value=0, max_value=30)
 
     # Create a DataFrame for the input features
@@ -183,6 +183,6 @@ def gpa_to_grade_class(gpa):
 if st.button('Dự đoán'):
     gpa_prediction = predict_gpa(clf, X_test)
     grade_class = gpa_to_grade_class(gpa_prediction)
-    st.success(f'Predicted GPA: {gpa_prediction:.2f}')
+    st.success(f'Predicted GPA: {gpa_prediction:.2ff}')
     st.success(f'Grade Class: {grade_class}')
 
