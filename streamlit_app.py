@@ -97,8 +97,8 @@ with st.sidebar:
     volunteering_selected = st.selectbox('Volunteering', ('Yes', 'No'))
     volunteering_encoded = volunteering_map[volunteering_selected]
 
-    #study_time_weekly = st.number_input('Study Time Weekly (hours)', min_value=0, max_value=20)
-    study_time_weekly = st.slider('Study Time Weekly (hours)', 0.00,20.00,10.00)
+    study_time_weekly = st.number_input('Study Time Weekly (hours)', min_value=0, max_value=20)
+    # study_time_weekly = st.slider('Study Time Weekly (hours)', 0.00,20.00,10.00)
     absences = st.number_input('Absences', min_value=0, max_value=30)
 
     # Create a DataFrame for the input features
