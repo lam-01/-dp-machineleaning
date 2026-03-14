@@ -1,13 +1,3 @@
-streamlit>=1.26.0
-numpy
-pandas
-scikit-learn
-spacy==3.7.2
-thinc
-smote
-seaborn
-matplotlib
-imbalanced-learn
 streamlit==1.28.1
 pandas==2.0.3
 numpy==1.24.3
